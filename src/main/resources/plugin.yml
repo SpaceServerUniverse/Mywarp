@@ -2,3 +2,7 @@ name: Mywarp
 version: '${version}'
 main: space.yurisi.mywarp.Mywarp
 api-version: '1.20'
+depend: [UniverseCore]
+commands:
+  mywarp:
+    description: マイワープのメインコマンドです
