@@ -1,0 +1,4 @@
+name: Mywarp
+version: '${version}'
+main: space.yurisi.mywarp.Mywarp
+api-version: '1.20'
