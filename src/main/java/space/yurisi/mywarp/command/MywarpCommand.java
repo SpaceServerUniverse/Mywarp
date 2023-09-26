@@ -9,6 +9,9 @@ import org.bukkit.command.CommandSender;
 
 import org.jetbrains.annotations.NotNull;
 
+import space.yurisi.universecore.UniverseCoreAPI;
+import space.yurisi.universecore.database.DatabaseConnector;
+import space.yurisi.universecore.database.DatabaseManager;
 import space.yurisi.universecore.database.models.Mywarp;
 import space.yurisi.universecore.database.repositories.MywarpRepository;
 import space.yurisi.universecore.database.repositories.UserRepository;
@@ -21,8 +24,11 @@ public class MywarpCommand implements CommandExecutor{
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
-        MywarpRepository mywarpRepository = Bukkit.getServicesManager().getRegistration(MywarpRepository.class).getProvider();
-        UserRepository userRepository = Bukkit.getServicesManager().getRegistration(UserRepository.class).getProvider();
+
+        DatabaseManager databaseManager = UniverseCoreAPI.getInstance().getDatabaseManager();
+        MywarpRepository mywarpRepository = databaseManager.getMywarpRepository();
+        UserRepository userRepository = databaseManager.getUserRepository();
+
 
         Long user_id = null;
         List<Mywarp> data = null;
@@ -31,8 +37,7 @@ public class MywarpCommand implements CommandExecutor{
             sender.sendMessage("プレイヤーからのみ実行可能です。");
             return false;
         }
-        String command_name = args[0];
-        if(command_name.isEmpty()){
+        if (args.length == 0) {
             sender.sendMessage("コマンド名を入力してください。" +
                     "使用可能なコマンドは以下の通りです。" +
                     "/mywarp create warp_name is_private" +
@@ -41,16 +46,17 @@ public class MywarpCommand implements CommandExecutor{
                     "/mywarp edit <warp_name>" +
                     "/mywarp delete <warp_name>" +
                     "/mywarp visit <player_name>"
-                    );
+            );
             return false;
         }
+        String command_name = args[0];
 
         switch (command_name){
 
             case "create":
                 String warp_name = args[1];
                 Boolean is_private = true;
-                if(!args[2].isEmpty()){
+                if(args.length == 3){
                     is_private = Boolean.parseBoolean(args[2]);
                 }
                 mywarpRepository.createMywarp(player, warp_name, is_private);
@@ -65,6 +71,10 @@ public class MywarpCommand implements CommandExecutor{
                     sender.sendMessage("ユーザーデータが見つかりませんでした。管理者にお問い合わせください。");
                 } catch (MywarpNotFoundException e){
                     sender.sendMessage("マイワープが見つかりませんでした。");
+                }
+                if(data == null){
+                    sender.sendMessage("マイワープが見つかりませんでした。");
+                    return false;
                 }
 
                 if(!command_name.equals("tp") || args[1].isEmpty()){
@@ -106,7 +116,7 @@ public class MywarpCommand implements CommandExecutor{
                 break;
 
             case "visit":
-                if(args[1].isEmpty()){
+                if(args.length == 1){
                     sender.sendMessage("プレイヤー名を入力してください。");
                     return false;
                 }
