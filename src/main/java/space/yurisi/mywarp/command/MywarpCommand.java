@@ -77,7 +77,11 @@ public class MywarpCommand implements CommandExecutor{
                     return false;
                 }
 
-                if(!command_name.equals("tp") || args[1].isEmpty()){
+                if(args.length == 1){
+                    if(command_name.equals("tp")){
+                        sender.sendMessage("ワープ先を入力してください。");
+                        return false;
+                    }
                     // show mywarp list in form and select warp point or edit or delete
                 }else{
                     // warp name から warp point を取得
@@ -132,6 +136,16 @@ public class MywarpCommand implements CommandExecutor{
                 }
                 // show mywarp list in form and select warp point
                 break;
+
+            case "debug":
+                try{
+                    user_id = userRepository.getPrimaryKeyFromPlayerName(player.getName());
+                    sender.sendMessage("user_id: " + user_id);
+                } catch (UserNotFoundException e){
+                    sender.sendMessage("ユーザーデータが見つかりませんでした。管理者にお問い合わせください。");
+                }
+                break;
+
             default:
                 sender.sendMessage("コマンド名を間違えています。");
                 return false;
