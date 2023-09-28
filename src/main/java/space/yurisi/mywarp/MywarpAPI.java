@@ -24,6 +24,10 @@ public class MywarpAPI extends UniverseCoreAPIConnector {
         return this.baseGetMywarpFromName(player, warp_name);
     }
 
+    public Boolean isExistMywarpName(Player player, String warp_name) throws UserNotFoundException, MywarpNotFoundException{
+        return this.baseisExistMywarpName(player, warp_name);
+    }
+
     public void createMywarp(Player player, String warp_name, Boolean is_private){
         this.baseCreateMywarp(player, warp_name, is_private);
     }

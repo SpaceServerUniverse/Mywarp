@@ -25,13 +25,12 @@ public class MywarpVisitCommand extends MywarpBaseCommand{
             for(Mywarp mywarp : data){
                 player.sendMessage(getSuccessMessage(mywarp.getName()));
             }
+            player.sendMessage(getSuccessMessage("ワープしました。"));
         } catch (UserNotFoundException e) {
             player.sendMessage(getErrorMessage("ユーザーが見つかりませんでした。"));
         } catch (MywarpNotFoundException e) {
             player.sendMessage(getErrorMessage("ワープポイントが見つかりませんでした。"));
         }
-
-        player.sendMessage(getSuccessMessage("ワープしました。"));
 
         return true;
     }

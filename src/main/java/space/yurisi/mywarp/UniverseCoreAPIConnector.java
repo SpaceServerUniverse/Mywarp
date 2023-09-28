@@ -22,6 +22,17 @@ public class UniverseCoreAPIConnector {
         setMywarpRepository(databaseManager.getMywarpRepository());
     }
 
+    protected Boolean baseisExistMywarpName(Player player, String warp_name) throws UserNotFoundException, MywarpNotFoundException{
+        Long user_id = userRepository.getPrimaryKeyFromUUID(player.getUniqueId());
+        List<Mywarp> mywarp_list = mywarpRepository.getMywarpFromUserId(user_id);
+        for (Mywarp mywarp : mywarp_list) {
+            if (mywarp.getName().equals(warp_name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     protected Mywarp baseGetMywarpFromName(Player player, String warp_name) throws UserNotFoundException, MywarpNotFoundException{
         Long user_id = userRepository.getPrimaryKeyFromUUID(player.getUniqueId());
         try {

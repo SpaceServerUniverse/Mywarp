@@ -20,13 +20,12 @@ public class MywarpDeleteCommand extends MywarpBaseCommand {
             try {
                 Mywarp mywarp = MywarpAPI.getInstance().getMywarpFromName(player, args[0]);
                 MywarpAPI.getInstance().deleteMywarp(mywarp);
+                player.sendMessage(getSuccessMessage("ワープポイント" + args[0] + "を削除しました。"));
             } catch (UserNotFoundException e) {
                 player.sendMessage(getErrorMessage("ユーザーデータが存在しないようです。管理者に報告してください。 コード-MWD1"));
             } catch (MywarpNotFoundException e) {
                 player.sendMessage(getErrorMessage("ワープポイントが見つかりませんでした。"));
             }
-
-            player.sendMessage(getSuccessMessage("ワープポイント" + args[0] + "を削除しました。"));
 
             return true;
         }

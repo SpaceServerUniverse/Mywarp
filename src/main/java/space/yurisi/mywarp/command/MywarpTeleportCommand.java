@@ -20,13 +20,12 @@ public class MywarpTeleportCommand extends MywarpBaseCommand {
             try {
                 Mywarp mywarp = MywarpAPI.getInstance().getMywarpFromName(player, args[0]);
                 MywarpAPI.getInstance().teleportMywarp(player, mywarp);
+                player.sendMessage(getSuccessMessage(args[0] + " にワープしました。"));
             } catch (UserNotFoundException e) {
                 player.sendMessage(getErrorMessage("ユーザーデータが存在しないようです。管理者に報告してください。 コード-MWT1"));
             } catch (MywarpNotFoundException e) {
                 player.sendMessage(getErrorMessage("ワープポイントが見つかりませんでした。"));
             }
-
-            player.sendMessage(getSuccessMessage(args[0] + " にワープしました。"));
 
             return true;
         }

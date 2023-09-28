@@ -20,13 +20,13 @@ public class MywarpHelpCommand  extends MywarpBaseCommand{
             return false;
         }
 
-        sender.sendMessage(getSuccessMessage("Mywarp Help"));
-        sender.sendMessage(getSuccessMessage("/mywarp : このヘルプを表示します。<>内は必須で、()内は必須ではありません"));
-        sender.sendMessage(getSuccessMessage("/mwlist : ワープポイントの一覧を表示し、選択してテレポートや削除ができます"));
-        sender.sendMessage(getSuccessMessage("/mwadd <ワープ名> (公開可否:true, false) : ワープポイントを追加します。デフォルトで非公開です"));
-        sender.sendMessage(getSuccessMessage("/mwdel <ワープ名> : 指定したワープポイントを削除します"));
-        sender.sendMessage(getSuccessMessage("/mwtp <ワープ名> : 指定したワープポイントにテレポートします"));
-        sender.sendMessage(getSuccessMessage("/mwvisit <相手の名前> : 指定したプレイヤーの公開ワープポイントを表示してテレポートできます"));
+        sender.sendMessage("Mywarp Help");
+        sender.sendMessage("/mywarp : このヘルプを表示します。<>内は必須で、()内は必須ではありません");
+        sender.sendMessage("/mwlist : ワープポイントの一覧を表示し、選択してテレポートや削除ができます");
+        sender.sendMessage("/mwadd <ワープ名> (公開可否:true, false) : ワープポイントを追加します。デフォルトで非公開です");
+        sender.sendMessage("/mwdel <ワープ名> : 指定したワープポイントを削除します");
+        sender.sendMessage("/mwtp <ワープ名> : 指定したワープポイントにテレポートします");
+        sender.sendMessage("/mwvisit <相手の名前> : 指定したプレイヤーの公開ワープポイントを表示してテレポートできます");
 
         return true;
     }
