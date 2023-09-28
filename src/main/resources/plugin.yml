@@ -7,4 +7,22 @@ softdepend:
   - "UniverseCore"
 commands:
   mywarp:
-    description: マイワープのメインコマンドです
+    description: マイワープのヘルプを表示します
+    usage: /mywarp
+  mwadd:
+    description: マイワープを追加します
+    usage: /mwadd <ワープ名> <公開するかどうか>
+  mwlist:
+    description: マイワープの一覧を表示します
+    usage: /mwlist
+  mwdel:
+    description: マイワープを削除します
+    usage: /mwdel <ワープ名>
+  mwtp:
+    description: マイワープにテレポートします
+    usage: /mwtp <ワープ名>
+  mwvisit:
+    description: 他人の公開マイワープに訪問します
+    usage: /mwvisit <ワープ名>
+
+
