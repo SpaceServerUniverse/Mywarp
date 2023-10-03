@@ -6,8 +6,8 @@ import space.yurisi.universecore.database.DatabaseManager;
 import space.yurisi.universecore.database.models.Mywarp;
 import space.yurisi.universecore.database.repositories.MywarpRepository;
 import space.yurisi.universecore.database.repositories.UserRepository;
-import space.yurisi.universecore.expection.MywarpNotFoundException;
-import space.yurisi.universecore.expection.UserNotFoundException;
+import space.yurisi.universecore.exception.MywarpNotFoundException;
+import space.yurisi.universecore.exception.UserNotFoundException;
 
 import java.util.List;
 

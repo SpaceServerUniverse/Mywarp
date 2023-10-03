@@ -7,8 +7,8 @@ import org.jetbrains.annotations.NotNull;
 
 import space.yurisi.mywarp.MywarpAPI;
 import space.yurisi.universecore.database.models.Mywarp;
-import space.yurisi.universecore.expection.MywarpNotFoundException;
-import space.yurisi.universecore.expection.UserNotFoundException;
+import space.yurisi.universecore.exception.MywarpNotFoundException;
+import space.yurisi.universecore.exception.UserNotFoundException;
 
 public class MywarpTeleportCommand extends MywarpBaseCommand {
 
