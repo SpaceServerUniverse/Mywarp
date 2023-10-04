@@ -17,6 +17,10 @@ public class MywarpDeleteCommand extends MywarpBaseCommand {
             if (!(sender instanceof Player player)) {
                 return false;
             }
+            if(args.length == 0){
+                player.sendMessage(getErrorMessage("ワープポイント名を入力してください。"));
+                return true;
+            }
             try {
                 Mywarp mywarp = MywarpAPI.getInstance().getMywarpFromName(player, args[0]);
                 MywarpAPI.getInstance().deleteMywarp(mywarp);

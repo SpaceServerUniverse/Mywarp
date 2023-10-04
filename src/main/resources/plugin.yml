@@ -23,6 +23,9 @@ commands:
     usage: /mwtp <ワープ名>
   mwvisit:
     description: 他人の公開マイワープに訪問します
-    usage: /mwvisit <ワープ名>
+    usage: /mwvisit <プレイヤー名> <ワープ名>
+  mwvisitlist:
+    description: 他人の公開マイワープの一覧を表示します
+    usage: /mwvisitlist
 
 

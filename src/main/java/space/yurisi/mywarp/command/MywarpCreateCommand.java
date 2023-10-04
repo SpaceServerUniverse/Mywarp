@@ -21,7 +21,11 @@ public class MywarpCreateCommand extends MywarpBaseCommand {
             return false;
         }
         if(args[0].length() > 20){
-            sender.sendMessage(getErrorMessage("名前は20文字以下にしてください。"));
+            sender.sendMessage(getErrorMessage("名前は空白なしの20文字以下にしてください。"));
+            return false;
+        }
+        if(args.length == 1) {
+            sender.sendMessage(getErrorMessage("公開可否をtrueかfalseで指定してください"));
             return false;
         }
         try{
@@ -37,20 +41,19 @@ public class MywarpCreateCommand extends MywarpBaseCommand {
             return false;
         }
 
-        boolean isPrivate = true;
-        if(args.length == 2){
-            if(args[1].equals("true") || args[1].equals("True") || args[1].equals("TRUE")) {
-                isPrivate = false;
-            }else if(args[1].equals("false") || args[1].equals("False") || args[1].equals("FALSE")) {
-                isPrivate = true;
-            }else{
-                sender.sendMessage(getErrorMessage("公開可否はtrueかfalseで指定してください。"));
-                return false;
-            }
+        boolean isPrivate;
+        if(args[1].equals("true") || args[1].equals("True") || args[1].equals("TRUE")) {
+            isPrivate = false;
+        }else if(args[1].equals("false") || args[1].equals("False") || args[1].equals("FALSE")) {
+            isPrivate = true;
+        }else{
+            sender.sendMessage(getErrorMessage("公開可否はtrueかfalseで指定してください。"));
+            return false;
         }
 
         MywarpAPI.getInstance().createMywarp(player, args[0], isPrivate);
-        player.sendMessage(getSuccessMessage("ワープポイント" + args[0] + "を作成しました。"));
+        String isPrivateString = isPrivate ? "非公開" : "公開";
+        player.sendMessage(getSuccessMessage("ワープポイント" + args[0] + "を" + isPrivateString + "で作成しました。"));
 
         return true;
     }

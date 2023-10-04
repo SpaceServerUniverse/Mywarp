@@ -15,6 +15,7 @@ public class MywarpCommandManagaer {
         main.getCommand("mwlist").setExecutor(new MywarpListCommand());
         main.getCommand("mwtp").setExecutor(new MywarpTeleportCommand());
         main.getCommand("mwvisit").setExecutor(new MywarpVisitCommand());
+        main.getCommand("mwvisitlist").setExecutor(new MywarpVisitListCommand());
     }
 }
 
