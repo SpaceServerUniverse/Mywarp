@@ -1,21 +1,22 @@
 package space.yurisi.mywarp.command;
 
 import space.yurisi.mywarp.Mywarp;
+import space.yurisi.mywarp.connector.UniverseCoreAPIConnector;
 
 public class MywarpCommandManagaer {
 
     public MywarpCommandManagaer(Mywarp main) {
-        init(main);
+        init(main, main.getConnector());
     }
 
-    private void init(Mywarp main) {
-        main.getCommand("mywarp").setExecutor(new MywarpHelpCommand());
-        main.getCommand("mwadd").setExecutor(new MywarpCreateCommand());
-        main.getCommand("mwdel").setExecutor(new MywarpDeleteCommand());
-        main.getCommand("mwlist").setExecutor(new MywarpListCommand());
-        main.getCommand("mwtp").setExecutor(new MywarpTeleportCommand());
-        main.getCommand("mwvisit").setExecutor(new MywarpVisitCommand());
-        main.getCommand("mwvisitlist").setExecutor(new MywarpVisitListCommand());
+    private void init(Mywarp main, UniverseCoreAPIConnector connector) {
+        main.getCommand("mywarp").setExecutor(new MywarpHelpCommand(connector));
+        main.getCommand("mwadd").setExecutor(new MywarpCreateCommand(connector));
+        main.getCommand("mwdel").setExecutor(new MywarpDeleteCommand(connector));
+        main.getCommand("mwlist").setExecutor(new MywarpListCommand(connector));
+        main.getCommand("mwtp").setExecutor(new MywarpTeleportCommand(connector));
+        main.getCommand("mwvisit").setExecutor(new MywarpVisitCommand(connector));
+        main.getCommand("mwvisitlist").setExecutor(new MywarpVisitListCommand(connector));
     }
 }
 

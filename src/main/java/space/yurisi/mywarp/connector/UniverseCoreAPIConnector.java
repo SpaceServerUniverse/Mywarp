@@ -1,4 +1,4 @@
-package space.yurisi.mywarp;
+package space.yurisi.mywarp.connector;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -22,7 +22,7 @@ public class UniverseCoreAPIConnector {
         setMywarpRepository(databaseManager.getMywarpRepository());
     }
 
-    protected Boolean baseisExistMywarpName(Player player, String warp_name) throws UserNotFoundException, MywarpNotFoundException{
+    public Boolean isExistsMywarpName(Player player, String warp_name) throws UserNotFoundException, MywarpNotFoundException{
         Long user_id = userRepository.getPrimaryKeyFromUUID(player.getUniqueId());
         List<Mywarp> mywarp_list = mywarpRepository.getMywarpFromUserId(user_id);
         for (Mywarp mywarp : mywarp_list) {
@@ -33,7 +33,7 @@ public class UniverseCoreAPIConnector {
         return false;
     }
 
-    protected Mywarp baseGetMywarpFromName(Player player, String warp_name) throws UserNotFoundException, MywarpNotFoundException{
+    public Mywarp getMywarpFromName(Player player, String warp_name) throws UserNotFoundException, MywarpNotFoundException{
         Long user_id = userRepository.getPrimaryKeyFromUUID(player.getUniqueId());
         try {
             List<Mywarp> mywarp_list = mywarpRepository.getMywarpFromUserId(user_id);
@@ -48,15 +48,15 @@ public class UniverseCoreAPIConnector {
         }
     }
 
-    protected void baseCreateMywarp(Player player, String warp_name, Boolean is_private){
+    public void createMywarp(Player player, String warp_name, Boolean is_private){
         mywarpRepository.createMywarp(player, warp_name, is_private);
     }
 
-    protected void baseDeleteMywarp(Mywarp mywarp) throws MywarpNotFoundException{
+    public void deleteMywarp(Mywarp mywarp) throws MywarpNotFoundException{
         mywarpRepository.deleteMywarp(mywarp);
     }
 
-    protected List<Mywarp> baseGetMywarpList(Player player) throws UserNotFoundException, MywarpNotFoundException{
+    public List<Mywarp> getMywarpList(Player player) throws UserNotFoundException, MywarpNotFoundException{
         Long user_id = userRepository.getPrimaryKeyFromUUID(player.getUniqueId());
         List<Mywarp> mywarpList = mywarpRepository.getMywarpFromUserId(user_id);
         if(mywarpList.isEmpty()){
@@ -65,7 +65,7 @@ public class UniverseCoreAPIConnector {
         return mywarpList;
     }
 
-    protected List<Mywarp> baseGetPublicMywarpListFromName(String target_user_name) throws MywarpNotFoundException, UserNotFoundException{
+    public List<Mywarp> getPublicMywarpListFromName(String target_user_name) throws MywarpNotFoundException, UserNotFoundException{
         Long user_id = userRepository.getPrimaryKeyFromPlayerName(target_user_name);
         List<Mywarp> mywarpList = mywarpRepository.getPublicMywarpFromUserId(user_id);
         if(mywarpList.isEmpty()){
@@ -74,7 +74,7 @@ public class UniverseCoreAPIConnector {
         return mywarpList;
     }
 
-    protected void baseTeleportMywarp(Player player, Mywarp mywarp) throws MywarpNotFoundException{
+    public void teleportMywarp(Player player, Mywarp mywarp) throws MywarpNotFoundException{
         Long x = mywarp.getX();
         Long y = mywarp.getY();
         Long z = mywarp.getZ();
