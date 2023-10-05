@@ -5,22 +5,28 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import space.yurisi.mywarp.MywarpAPI;
+import space.yurisi.mywarp.connector.UniverseCoreAPIConnector;
 import space.yurisi.universecore.database.models.Mywarp;
 import space.yurisi.universecore.exception.MywarpNotFoundException;
 import space.yurisi.universecore.exception.UserNotFoundException;
 
 public class MywarpListCommand extends MywarpBaseCommand {
 
-        @Override
+    public MywarpListCommand(UniverseCoreAPIConnector connector) {
+        super(connector);
+    }
+
+    @Override
         public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args){
             if (!(sender instanceof Player player)) {
                 return false;
             }
+
             try {
                 //formを表示してそこからtpできるようにする
                 //下はデバッグ用
-                for(Mywarp mywarp : MywarpAPI.getInstance().showListMywarp(player)){
+                //TODO ページング
+                for(Mywarp mywarp : connector.getMywarpList(player)){
                     player.sendMessage(getSuccessMessage(mywarp.getName()));
                 }
             } catch (UserNotFoundException e) {

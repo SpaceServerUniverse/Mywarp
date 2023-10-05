@@ -5,34 +5,36 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import space.yurisi.mywarp.connector.UniverseCoreAPIConnector;
 import space.yurisi.universecore.database.models.Mywarp;
-import space.yurisi.mywarp.MywarpAPI;
 import space.yurisi.universecore.exception.MywarpNotFoundException;
 import space.yurisi.universecore.exception.UserNotFoundException;
 
 import java.util.List;
 
 public class MywarpVisitCommand extends MywarpBaseCommand{
+    public MywarpVisitCommand(UniverseCoreAPIConnector connector) {
+        super(connector);
+    }
+
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args){
         if(!(sender instanceof Player player)){
             return false;
         }
-        if(args.length == 0){
-            player.sendMessage(getErrorMessage("ユーザー名を入力してください。"));
-            return true;
+
+        if(args.length <=1){
+            return false;
         }
-        if(args.length == 1){
-            player.sendMessage(getErrorMessage("ワープポイント名を入力してください。"));
-            return true;
-        }
+
         try {
-            List<Mywarp> data = MywarpAPI.getInstance().showListPublicMywarpFromName(args[0]);
+            List<Mywarp> data = connector.getPublicMywarpListFromName(args[0]);
             // ワープポイントの一覧をフォームで表示
             // デバッグ用
+            // TODO: クエリから取得
             for(Mywarp mywarp : data){
                 if(mywarp.getName().equals(args[1])){
-                    MywarpAPI.getInstance().teleportMywarp(player, mywarp);
+                    connector.teleportMywarp(player, mywarp);
                     player.sendMessage(getSuccessMessage(args[1] + " にワープしました。"));
                     return true;
                 }
