@@ -6,8 +6,10 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import space.yurisi.mywarp.connector.UniverseCoreAPIConnector;
+import space.yurisi.universecore.UniverseCoreAPI;
 import space.yurisi.universecore.exception.MywarpNotFoundException;
 import space.yurisi.universecore.exception.UserNotFoundException;
+import space.yurisi.mywarp.file.Config;
 
 public class MywarpCreateCommand extends MywarpBaseCommand {
 
@@ -27,6 +29,10 @@ public class MywarpCreateCommand extends MywarpBaseCommand {
 
         if(args[0].length() > 20){
             sender.sendMessage(getErrorMessage("名前は空白なしの20文字以下にしてください。"));
+            return true;
+        }
+        if(connector.isDenyWorld(player.getWorld().getName())){
+            sender.sendMessage(getErrorMessage("このワールドではワープポイントを作成できません。"));
             return true;
         }
 

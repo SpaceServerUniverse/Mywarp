@@ -8,6 +8,7 @@ import space.yurisi.universecore.database.repositories.MywarpRepository;
 import space.yurisi.universecore.database.repositories.UserRepository;
 import space.yurisi.universecore.exception.MywarpNotFoundException;
 import space.yurisi.universecore.exception.UserNotFoundException;
+import space.yurisi.mywarp.file.Config;
 
 import java.util.List;
 
@@ -17,9 +18,12 @@ public class UniverseCoreAPIConnector {
 
     private MywarpRepository mywarpRepository;
 
-    public UniverseCoreAPIConnector(DatabaseManager databaseManager){
+    protected final List<String> denyWorlds;
+
+    public UniverseCoreAPIConnector(DatabaseManager databaseManager, Config config){
         setUserRepository(databaseManager.getUserRepository());
         setMywarpRepository(databaseManager.getMywarpRepository());
+        this.denyWorlds = config.getDenyWorlds();
     }
 
     public Boolean isExistsMywarpName(Player player, String warp_name) throws UserNotFoundException, MywarpNotFoundException{
@@ -81,6 +85,10 @@ public class UniverseCoreAPIConnector {
         String world_name = mywarp.getWorld_name();
         Location location = new Location(player.getServer().getWorld(world_name), x, y, z);
         player.teleport(location);
+    }
+
+    public Boolean isDenyWorld(String world_name){
+        return denyWorlds.contains(world_name);
     }
 
     public void setUserRepository(UserRepository userRepository) {

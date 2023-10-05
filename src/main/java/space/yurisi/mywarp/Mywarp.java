@@ -19,8 +19,8 @@ public final class Mywarp extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         DatabaseManager manager = UniverseCoreAPI.getInstance().getDatabaseManager();
-        this.connector = new UniverseCoreAPIConnector(manager);
         this.config = new Config(this);
+        this.connector = new UniverseCoreAPIConnector(manager, this.config);
         new MywarpCommandManagaer(this);
     }
 
