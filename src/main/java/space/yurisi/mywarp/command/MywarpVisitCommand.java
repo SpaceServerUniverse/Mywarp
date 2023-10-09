@@ -35,7 +35,7 @@ public class MywarpVisitCommand extends MywarpBaseCommand{
             for(Mywarp mywarp : data){
                 if(mywarp.getName().equals(args[1])){
                     connector.teleportMywarp(player, mywarp);
-                    player.sendMessage(getSuccessMessage(args[1] + " にワープしました。"));
+                    player.sendMessage(getSuccessMessage("§b" + args[0] + "§2さんの§6" + args[1] + " §2にワープしました。"));
                     return true;
                 }
             }
