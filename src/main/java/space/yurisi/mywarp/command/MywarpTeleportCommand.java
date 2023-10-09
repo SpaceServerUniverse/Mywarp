@@ -28,7 +28,7 @@ public class MywarpTeleportCommand extends MywarpBaseCommand {
             try {
                 Mywarp mywarp = connector.getMywarpFromName(player, args[0]);
                 connector.teleportMywarp(player, mywarp);
-                player.sendMessage(getSuccessMessage(args[0] + " にワープしました。"));
+                player.sendMessage(getSuccessMessage("§6" + args[0] + " §2にワープしました。"));
             } catch (UserNotFoundException e) {
                 player.sendMessage(getErrorMessage("ユーザーデータが存在しないようです。管理者に報告してください。 コード-MWT1"));
             } catch (MywarpNotFoundException e) {
