@@ -11,7 +11,7 @@ commands:
     usage: /mywarp
   mwadd:
     description: マイワープを追加します
-    usage: /mwadd <ワープ名> <公開するかどうか>
+    usage: /mwadd <ワープ名> <公開するかどうか する|しない>
   mwlist:
     description: マイワープの一覧を表示します
     usage: /mwlist
