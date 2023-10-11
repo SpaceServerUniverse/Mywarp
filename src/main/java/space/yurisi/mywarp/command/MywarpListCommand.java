@@ -37,7 +37,12 @@ public class MywarpListCommand extends MywarpBaseCommand {
                         player.sendMessage(getSuccessMessage("/mwlist ページ番号(§b1~" + mwpage + "§2)でページを指定できます。"));
                     }
                 }else {
-                    page = Integer.parseInt(args[0]) - 1;
+                    try {
+                        page = Integer.parseInt(args[0]) - 1;
+                    }catch (NumberFormatException e){
+                        player.sendMessage(getErrorMessage("ページ番号は数字で指定してください。"));
+                        return true;
+                    }
                     if(page < 0){
                         player.sendMessage(getErrorMessage("ページ番号は1以上で指定してください。"));
                         return true;
