@@ -53,12 +53,13 @@ public class MywarpListCommand extends MywarpBaseCommand {
                     }
                 }
                 player.sendMessage("§a公開状態 | ワールド | ワープポイント名");
+                int mywarp_i = 0;
                 for(int i = 0; i < 5; i++){
-                    i = i + (page * 5);
-                    if(mywarpList.size() <= i){
+                    mywarp_i = i + (page * 5);
+                    if(mywarpList.size() <= mywarp_i){
                         break;
                     }
-                    Mywarp mywarp = mywarpList.get(i);
+                    Mywarp mywarp = mywarpList.get(mywarp_i);
                     String mwprivate = "　公開　";
                     if(mywarp.getIs_private()) {
                         mwprivate = "非公開　";
