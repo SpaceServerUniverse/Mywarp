@@ -49,12 +49,13 @@ public class MywarpVisitListCommand extends MywarpBaseCommand {
                 }
             }
             player.sendMessage("§aワールド | ワープポイント名");
+            int mywarp_i = 0;
             for(int i = 0; i < 5; i++){
-                i = i + (page * 5);
-                if(mywarpList.size() <= i){
+                mywarp_i = i + (page * 5);
+                if(mywarpList.size() <= mywarp_i){
                     break;
                 }
-                Mywarp mywarp = mywarpList.get(i);
+                Mywarp mywarp = mywarpList.get(mywarp_i);
                 player.sendMessage(mywarp.getWorld_name() + " | §6" + mywarp.getName());
             }
             player.sendMessage(getSuccessMessage("ワープポイント一覧 §b" + (page + 1) + "/" + mwpage + "§2ページ目を表示中"));
